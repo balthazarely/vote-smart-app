@@ -78,6 +78,18 @@ span {
 	max-height: 70vh;
 	margin: 10px;
 }
+
+@media screen and (max-width: 3000px) {
+	.end-box {
+		max-width: 40vw;
+	}
+}
+@media screen and (max-width: 1400px) {
+	.end-box {
+		max-width: 50vw;
+	}
+}
+
 @media screen and (max-width: 800px) {
 	.end-box {
 		max-width: 50vw;
@@ -94,6 +106,11 @@ span {
 	margin-bottom: 40px;
 }
 
+@media screen and (max-width: 1200px) {
+	.logo {
+		width: 240px;
+	}
+}
 @media screen and (max-width: 800px) {
 	.logo {
 		width: 200px;
@@ -110,7 +127,7 @@ span {
 	/* padding: 10px; */
 	font-size: 18px;
 	line-height: 2.5rem;
-	text-align: center;
+	text-align: left;
 }
 @media screen and (max-width: 800px) {
 	.end-body {
