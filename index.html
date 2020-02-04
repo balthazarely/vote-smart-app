@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>VoteSmart</title>
+		<link rel="stylesheet" href="app.css" />
+		<link rel="stylesheet" href="game.css" />
+		<link
+			href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Domine&display=swap"
+			rel="stylesheet"
+		/>
+		<!--load all styles -->
+
+		<!-- Load D3 -->
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="nav-bar">
+				<div class="logo-wrapper">
+					<img src="Artboard 2.png" class="logo" alt="" />
+				</div>
+				<a href="index.html" class="nav-item">Restart</a>
+				<a class="nav-item" id="about-btn" href="end.html">About</a>
+			</div>
+		</div>
+
+		<div class="container" id="main-game">
+			<div id="game" class="justify-center flex-column">
+				<div id="hud">
+					<div id="hud-item">
+						<p class="hud-prefix">
+							Question
+						</p>
+						<h1 class="hud-main-text" id="questionCounter"></h1>
+					</div>
+					<div id="hud-item-next" class="next-btn hidden">
+						<div id="next-btn-container">
+							<p id="next">
+								next
+							</p>
+						</div>
+
+						<h1 class="hud-main-text" id="questionCounter"></h1>
+					</div>
+				</div>
+
+				<div id="candidates-container">
+					<div id="candidates-yes">
+						<p></p>
+					</div>
+					<div id="candidates-no">
+						<p></p>
+					</div>
+				</div>
+
+				<div id="question-container" class="">
+					<div id="question-wrap">
+						<h3 id="question">What is the answer to this questions?</h3>
+						<h3 id="question-response"></h3>
+					</div>
+
+					<div id="headshot-container">
+						<div id="headshot-yes"></div>
+						<div id="headshot-no"></div>
+					</div>
+					<div id="candidate-opinion-header"></div>
+					<div id="hover-here"></div>
+					<div id="candidates-opinions"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="results-container" class="">
+			<div class="main-choice-container">
+				<div class="choice-container">
+					<p class="choice-text" data-number="1" id="btn-1">Choice 1</p>
+				</div>
+				<div class="choice-container">
+					<p class="choice-text" data-number="2" id="btn-2">Choice 2</p>
+				</div>
+				<div class="choice-container">
+					<p class="choice-text" data-number="3" id="btn-3">Choice 3</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="end-btn-container">
+			<div id="btn-end" class="hidden">
+				<p id="end" onclick="showTally()">Results</p>
+			</div>
+		</div>
+
+		<div id="hide-this" class="hidden">
+			<div id="final-text-wrapper" class="">
+				<div id="textWrapper">
+					<div class="text-row">
+						<div class="text-column">
+							<h3>
+								Your top candidiates were <span id="cand-1"></span>,
+								<span id="cand-2"></span>, <span id="cand-3"></span> and
+								<span id="cand-4"></span>.
+							</h3>
+						</div>
+						<div class="text-column">
+							<div class="end-photo"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <h2 id="triggered">test</h2> -->
+
+		<div id="all-counting-num" class="hidden">
+			<div class="rule-wrapper">
+				<hr class="rule" />
+			</div>
+			<div class="results-header">
+				<h3>Days Until</h3>
+			</div>
+			<div id="number-wrapper">
+				<div class="number-container">
+					<div class="number-item">
+						<div class="counter-text">Days till Iowa Caucues</div>
+						<div id="iowa-caucues" class="counter-number">0</div>
+					</div>
+					<div class="number-item">
+						<div class="counter-text">Days till New Hampshire Primary</div>
+						<div id="hampshire-primary" class="counter-number">0</div>
+					</div>
+					<div class="number-item">
+						<div class="counter-text">Days till South Carolina Primary</div>
+						<div id="southcar-primary" class="counter-number">0</div>
+					</div>
+					<div class="number-item">
+						<div class="counter-text">Days till Nevada Caucues</div>
+						<div id="nevada-caucues" class="counter-number">0</div>
+					</div>
+					<div class="number-item">
+						<div class="counter-text">Days till Super Tuesday</div>
+						<div id="super-tuesday" class="counter-number">0</div>
+					</div>
+					<div class="number-item">
+						<div class="counter-text">Days till Election Day</div>
+						<div id="election-day" class="counter-number">0</div>
+					</div>
+				</div>
+			</div>
+			<div class="rule-wrapper">
+				<hr class="rule" />
+			</div>
+		</div>
+
+		<div id="final-chart-wrapper" class="hidden">
+			<div id="chartWrapper">
+				<div class="chart-row">
+					<div class="chart-column">
+						<canvas
+							class="myChart"
+							id="myChart"
+							width="400"
+							height="400"
+						></canvas>
+						<div id="btn-mod-here"></div>
+					</div>
+
+					<div class="chart-column">
+						<canvas id="myChart2" width="400" height="400"></canvas>
+						<div id="btn-mod-2-here"></div>
+					</div>
+				</div>
+			</div>
+			<div class="rule-wrapper">
+				<hr class="rule" />
+			</div>
+		</div>
+
+		<div id="idk" class="hidden">
+			<div id="final-chart-wrapper-lower">
+				<div id="chartWrapperLower">
+					<div class="chart-row-lower">
+						<div class="results-header">
+							<h3>General Election Polls</h3>
+						</div>
+						<div class="chart-column-lower">
+							<canvas
+								class="smallChart"
+								id="smallChart-0"
+								width="130"
+								height="130"
+							></canvas>
+						</div>
+						<div class="chart-column-lower">
+							<canvas
+								class="smallChart"
+								id="smallChart-1"
+								width="130"
+								height="130"
+							></canvas>
+						</div>
+						<div class="chart-column-lower">
+							<canvas
+								class="smallChart"
+								id="smallChart-2"
+								width="130"
+								height="130"
+							></canvas>
+						</div>
+						<div class="chart-column-lower">
+							<canvas
+								class="smallChart"
+								id="smallChart-3"
+								width="130"
+								height="130"
+							></canvas>
+						</div>
+						<div class="chart-column-lower">
+							<canvas
+								class="smallChart"
+								id="smallChart-4"
+								width="130"
+								height="130"
+							></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <button onclick=removeCandidate()>CLICK ME GOD</button> -->
+
+		<div id="all-the-results" class="hidden">
+			<div class="rule-wrapper">
+				<hr class="rule" />
+			</div>
+
+			<div class="results-header">
+				<h3>Candidate Opinions</h3>
+			</div>
+			<div class="all-results-container">
+				<div id="table-container">
+					<p id="table-question-0" class="table-question bigger"></p>
+					<p id="table-question-0-response" class="table-question-response"></p>
+					<div id="table-candidates-0" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-0"
+						class="candidate-name-result hidden"
+					>
+						text
+					</div>
+					<!-- <hr class="rule"> -->
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-1" class="table-question bigger"></p>
+					<p id="table-question-1-response" class="table-question-response"></p>
+					<div id="table-candidates-1" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-1"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+					<!-- <hr class="rule"> -->
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-2" class="table-question bigger"></p>
+					<p id="table-question-2-response" class="table-question-response"></p>
+					<div id="table-candidates-2" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-2"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+					<!-- <hr class="rule"> -->
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-3" class="table-question bigger"></p>
+					<p id="table-question-3-response" class="table-question-response"></p>
+					<div id="table-candidates-3" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-3"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+					<!-- <hr class="rule"> -->
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-4" class="table-question bigger"></p>
+					<p id="table-question-4-response" class="table-question-response"></p>
+					<div id="table-candidates-4" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-4"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+					<!-- <hr class="rule"> -->
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-5" class="table-question bigger"></p>
+					<p id="table-question-5-response" class="table-question-response"></p>
+					<div id="table-candidates-5" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-5"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+					<!-- <hr class="rule"> -->
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-6" class="table-question bigger"></p>
+					<p id="table-question-6-response" class="table-question-response"></p>
+					<div id="table-candidates-6" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-6"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+					<!-- <hr class="rule"> -->
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-7" class="table-question bigger"></p>
+					<p id="table-question-7-response" class="table-question-response"></p>
+					<div id="table-candidates-7" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-7"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-8" class="table-question bigger"></p>
+					<p id="table-question-8-response" class="table-question-response"></p>
+					<div id="table-candidates-8" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-8"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-9" class="table-question bigger"></p>
+					<p id="table-question-9-response" class="table-question-response"></p>
+					<div id="table-candidates-9" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-9"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-10" class="table-question bigger"></p>
+					<p
+						id="table-question-10-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-10" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-10"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-11" class="table-question bigger"></p>
+					<p
+						id="table-question-11-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-11" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-11"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-12" class="table-question bigger"></p>
+					<p
+						id="table-question-12-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-12" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-12"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-13" class="table-question bigger"></p>
+					<p
+						id="table-question-13-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-13" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-13"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-14" class="table-question bigger"></p>
+					<p
+						id="table-question-14-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-14" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-14"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-15" class="table-question bigger"></p>
+					<p
+						id="table-question-15-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-15" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-15"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-16" class="table-question bigger"></p>
+					<p
+						id="table-question-16-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-16" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-16"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-17" class="table-question bigger"></p>
+					<p
+						id="table-question-17-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-17" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-17"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-18" class="table-question bigger"></p>
+					<p
+						id="table-question-18-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-18" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-18"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+
+				<div id="table-container">
+					<p id="table-question-19" class="table-question bigger"></p>
+					<p
+						id="table-question-19-response"
+						class="table-question-response"
+					></p>
+					<div id="table-candidates-19" class="table-candidates"></div>
+					<div
+						id="canidate-name-results-19"
+						class="candidate-name-result hidden"
+					>
+						Text
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<p id="explination"></p>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.5/gsap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+
+		<script src="game.js"></script>
+	</body>
+</html>
