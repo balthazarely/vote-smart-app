@@ -1164,7 +1164,7 @@ choices.forEach(choice => {
 			let hoverHereInner = document.createElement("div");
 			hoverHereInner.classList.add("hover-here-inner");
 			hoverHereInner.innerText =
-				"Hover mouse over candidate photos for more infomation";
+				"Hover or click candidate photos for more infomation";
 			document.getElementById("hover-here").appendChild(hoverHereInner);
 
 			for (let i = 0; i < currentQuestion.choice1Headshots.length; i++) {
