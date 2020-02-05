@@ -97,6 +97,7 @@ span {
 }
 .logo {
 	width: 250px;
+	height: 63.3px;
 }
 
 .logo-wrapper-end {
@@ -106,7 +107,7 @@ span {
 	margin-bottom: 40px;
 }
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
 	.logo {
 		width: 240px;
 	}
@@ -120,7 +121,7 @@ span {
 	.logo {
 		width: 150px;
 	}
-}
+} */
 
 .end-body {
 	color: white;

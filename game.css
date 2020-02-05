@@ -1,6 +1,6 @@
 .header {
 	background: #019ad2;
-	height: 120px;
+	height: 100px;
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
@@ -22,15 +22,18 @@
 	font-size: 5rem;
 	color: white;
 	width: 220px;
+	height: 55.7px;
 }
 @media screen and (max-width: 600px) {
 	.logo {
 		width: 180px;
+		height: 45.6px;
 	}
 }
 @media screen and (max-width: 450px) {
 	.logo {
 		width: 120px;
+		height: 30.4px;
 	}
 }
 
@@ -73,7 +76,7 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	/* margin-top: -100px; */
+	margin-top: -20px;
 }
 
 @media only screen and (max-width: 700px) {
@@ -426,6 +429,7 @@
 	filter: gray;
 	-webkit-filter: grayscale(1);
 	width: 80px;
+	height: 133.3334px;
 	/* width: auto; */
 }
 
